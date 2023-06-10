@@ -1,0 +1,23 @@
+EXPORTS
+	DebugExtensionInitialize		@	1
+	DebugExtensionUninitialize		@	2
+	ExtensionApiVersion				@	3
+	KnownStructOutput				@	4
+
+	jshelp
+	jscall
+	jsrun
+	jsload
+    jsunload
+    jsclear
+    jslist
+
+    help = jshelp
+    call = jscall
+    js = jsrun
+    run = jsrun
+    load = jsload
+    unload = jsunload
+    list = jslist
+
+

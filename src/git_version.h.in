@@ -1,0 +1,27 @@
+/**
+ * @file git_version.h.in.h
+ * @author tinysec
+ * @brief
+ * @version 0.0.1
+ * 2023-06-07   init
+ */
+
+#ifndef __MY_GIT_VERSION_H_IN_HEADER_FILE__
+#define __MY_GIT_VERSION_H_IN_HEADER_FILE__
+////////////////////////////////////////////////////
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+    ////////////////////////////////////////////////////
+
+#define GIT_BRANCH "${GIT_BRANCH}"
+
+#define GIT_COMMIT_HASH "${GIT_COMMIT_HASH}"
+
+////////////////////////////////////////////////////
+#ifdef __cplusplus
+} // extern "C"
+#endif
+////////////////////////////////////////////////////
+#endif //__MY_GIT_VERSION_H_IN_HEADER_FILE__

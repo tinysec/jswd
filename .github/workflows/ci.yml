@@ -1,0 +1,57 @@
+name: project
+
+on: push
+      
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get DateTime
+        id: datetime
+        run: |
+          $datetime = Get-Date -Format "yyyyMMdd-HHmmss"
+          echo "datetime=$datetime" >> $env:GITHUB_OUTPUT
+
+      - name: Get Repository
+        id: repository
+        run: |
+          $repository = Split-Path -Leaf $env:GITHUB_REPOSITORY
+          echo "repository=$repository" >> $env:GITHUB_OUTPUT
+
+      - name: Build x86
+        run: |
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -A Win32 -B "x86" .. 
+          cmake --build x86 --config Release
+
+      - name: Build x64
+        run: |
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -A X64 -B "x64" .. 
+          cmake --build x64 --config Release
+
+      - name: Create ZIP
+        id: compress
+        run: |
+          $datetime = "${{steps.datetime.outputs.datetime}}"
+          echo "[+] now is $datetime"
+          Compress-Archive -Path "build\x86\Release\*.dll","build\x86\Release\*.pdb" -DestinationPath "${{ steps.repository.outputs.repository }}-${{ steps.datetime.outputs.datetime }}-x86.zip"
+          Compress-Archive -Path "build\x64\Release\*.dll","build\x64\Release\*.pdb" -DestinationPath "${{ steps.repository.outputs.repository }}-${{ steps.datetime.outputs.datetime }}-x64.zip"
+
+      - name: Create Release
+        id: release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: autotag-${{ steps.datetime.outputs.datetime }}
+          generate_release_notes: true
+          draft: true
+          prerelease: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            ${{ steps.repository.outputs.repository }}-${{ steps.datetime.outputs.datetime }}-x86.zip
+            ${{ steps.repository.outputs.repository }}-${{ steps.datetime.outputs.datetime }}-x64.zip
