@@ -9,7 +9,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GIT_TOKEN }}
 
       - name: Get DateTime
         id: datetime
@@ -24,12 +24,16 @@ jobs:
           echo "repository=$repository" >> $env:GITHUB_OUTPUT
 
       - name: Build x86
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
         run: |
           mkdir build && cd build
           cmake -DCMAKE_BUILD_TYPE=Release -A Win32 -B "x86" .. 
           cmake --build x86 --config Release
 
       - name: Build x64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
         run: |
           mkdir build && cd build
           cmake -DCMAKE_BUILD_TYPE=Release -A X64 -B "x64" .. 
@@ -51,7 +55,7 @@ jobs:
           generate_release_notes: true
           draft: true
           prerelease: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GIT_TOKEN }}
           files: |
             ${{ steps.repository.outputs.repository }}-${{ steps.datetime.outputs.datetime }}-x86.zip
             ${{ steps.repository.outputs.repository }}-${{ steps.datetime.outputs.datetime }}-x64.zip
