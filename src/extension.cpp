@@ -80,11 +80,7 @@ void Extension::printUsage()
                                  GIT_COMMIT_HASH,
                                  __DATE__, __TIME__);
 
-        this->m_pod->DebugPrintf("You can also got help by these ways.\n");
-
-        this->m_pod->DebugPrintf("GitHub: https://github.com/tinysec/jswd\n");
-
-        this->m_pod->DebugPrintf("Slack: https://win32k.slack.com/archives/jswd\n");
+        this->m_pod->DebugPrintf("You can also got from https://github.com/tinysec/jswd.\n");
 
         this->m_pod->DebugPrintf("Usage: !js.[command] [args]...\n");
 
