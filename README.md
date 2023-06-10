@@ -1,3 +1,5 @@
 # jswd
 
-javascript extension of windbg for hacker , powered by https://github.com/tinysec/jsex project.
+Windbg javascript extension for hacker , a gift from tinysec.
+
+Powered by [JSEX](https://github.com/tinysec/jsex) project.
