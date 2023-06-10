@@ -104,7 +104,8 @@ extern "C"
 #define MY_VERSION_FILEDESCRIPTION MY_VERSION_COMMENTS
 
 #define MY_VERSION_LEGALCOPYRIGHT "hackhop Inc. All Rights Reserved\0"
-#define MY_VERSION_LEGALTRADEMARKS "github.com/hackhop\0"
+
+#define MY_VERSION_LEGALTRADEMARKS "github.com/hackhop/jswd\0"
 
 #define MY_VERSION_PRODUCTNAME "jswd\0"
 
