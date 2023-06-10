@@ -57,8 +57,14 @@ if (JSEX_PATH)
 
 else ()
 
+    if(DEFINED ENV{GITHUB_TOKEN})
+      set(GIT_REPO https://tinysec:$ENV{GITHUB_TOKEN}@github.com/hackhop/jsex)
+    else()
+      set(GIT_REPO https://github.com/hackhop/jsex)
+    endif()
+
     FetchContent_Declare(jsex
-            GIT_REPOSITORY https://github.com/hackhop/jsex.git
+            GIT_REPOSITORY ${GIT_REPO}
             GIT_TAG v0.0.1-beta.1001
             )
 
