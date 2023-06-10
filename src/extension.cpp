@@ -82,7 +82,7 @@ void Extension::printUsage()
 
         this->m_pod->DebugPrintf("You can also got help by these ways.\n");
 
-        this->m_pod->DebugPrintf("GitHub: https://github.com/hackhop/jswd\n");
+        this->m_pod->DebugPrintf("GitHub: https://github.com/tinysec/jswd\n");
 
         this->m_pod->DebugPrintf("Slack: https://win32k.slack.com/archives/jswd\n");
 

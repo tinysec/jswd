@@ -60,7 +60,7 @@ else ()
     if(DEFINED ENV{GITHUB_TOKEN})
       set(GIT_REPO https://tinysec:$ENV{GITHUB_TOKEN}@github.com/hackhop/jsex)
     else()
-      set(GIT_REPO https://github.com/hackhop/jsex)
+      set(GIT_REPO https://github.com/tinysec/jsex)
     endif()
 
     FetchContent_Declare(jsex

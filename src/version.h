@@ -51,7 +51,7 @@ extern "C"
 
 #define MY_VERSION_MINOR 0
 
-#define MY_BANNER   "Windbg javascript extension for hacker , a hacker's gift.\n"
+#define MY_BANNER   "Windbg javascript extension for hacker.\n"
 
 #define MY_VERSION_PART_1 MY_VERSION_MAJOR
 
@@ -99,12 +99,13 @@ extern "C"
 
 #endif // #ifdef _WIN64
 
-#define MY_VERSION_COMPANYNAME "github.com/hackhop\0"
+#define MY_VERSION_COMPANYNAME "github.com/tinysec\0"
 
 #define MY_VERSION_FILEDESCRIPTION MY_VERSION_COMMENTS
 
-#define MY_VERSION_LEGALCOPYRIGHT "hackhop Inc. All Rights Reserved\0"
-#define MY_VERSION_LEGALTRADEMARKS "github.com/hackhop\0"
+#define MY_VERSION_LEGALCOPYRIGHT "tinysec.net. All Rights Reserved\0"
+
+#define MY_VERSION_LEGALTRADEMARKS "Powered by TinySec!\0"
 
 #define MY_VERSION_PRODUCTNAME "jswd\0"
 
