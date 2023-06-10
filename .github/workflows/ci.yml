@@ -40,6 +40,7 @@ jobs:
           cmake --build x64 --config Release
 
       - name: Create ZIP
+        if: startsWith(github.ref, 'refs/tags/')
         id: compress
         run: |
           $datetime = "${{steps.datetime.outputs.datetime}}"
@@ -48,6 +49,7 @@ jobs:
           Compress-Archive -Path "build\x64\Release\*.dll","build\x64\Release\*.pdb" -DestinationPath "${{ steps.repository.outputs.repository }}-${{ steps.datetime.outputs.datetime }}-x64.zip"
 
       - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
         id: release
         uses: softprops/action-gh-release@v1
         with:
