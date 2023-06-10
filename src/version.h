@@ -47,7 +47,7 @@ extern "C"
 
     //////////////////////////////////////////////////////////////////////////
 
-#define MY_VERSION_MAJOR 1
+#define MY_VERSION_MAJOR 0
 
 #define MY_VERSION_MINOR 0
 
