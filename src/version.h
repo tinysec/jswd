@@ -51,7 +51,7 @@ extern "C"
 
 #define MY_VERSION_MINOR 0
 
-#define MY_BANNER   "Windbg javascript extension for hacker , a hacker's gift.\n"
+#define MY_BANNER   "Windbg javascript extension for hacker.\n"
 
 #define MY_VERSION_PART_1 MY_VERSION_MAJOR
 
