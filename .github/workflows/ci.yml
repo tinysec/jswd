@@ -35,7 +35,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
         run: |
-          mkdir build && cd build
+          cd build
           cmake -DCMAKE_BUILD_TYPE=Release -A X64 -B "x64" .. 
           cmake --build x64 --config Release
 
