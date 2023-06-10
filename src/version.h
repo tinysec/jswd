@@ -99,7 +99,7 @@ extern "C"
 
 #endif // #ifdef _WIN64
 
-#define MY_VERSION_COMPANYNAME "github.com/hackhop\0"
+#define MY_VERSION_COMPANYNAME "github.com/hackhop/jswd\0"
 
 #define MY_VERSION_FILEDESCRIPTION MY_VERSION_COMMENTS
 
