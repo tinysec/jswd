@@ -1,11 +1,10 @@
 const fmt = require("fmt");
 
-
 const jswd = require("jswd");
 
-fmt.printf( "execute: %s\n" , jswd.execute("!dt -h") );
+const _ = require('underscore');
 
-
+let int = require('integer').Uint64;
 
 /**
  *
@@ -13,9 +12,12 @@ fmt.printf( "execute: %s\n" , jswd.execute("!dt -h") );
  */
 function main(argv)
 {
-    fmt.printf("[+] i am from jswd!\n");
-
     fmt.printf("argv[0] is %s\n", argv[0]);
+
+    fmt.printf( 'sizeof(nt!_UNICODE_STRING): %d\n' , jswd.sizeof('nt!_UNICODE_STRING') );
+
+    fmt.printf( 'fieldOffset(nt!_UNICODE_STRING , Buffer): %d\n' , jswd.fieldOffset('nt!_UNICODE_STRING' , 'Buffer') );
+
 
     return 0;
 }

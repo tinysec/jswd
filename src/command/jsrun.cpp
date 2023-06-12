@@ -52,8 +52,13 @@ EXTERN_C HRESULT __stdcall jsrun(IDebugClient *debugClient, const char *cmdline)
         errorCode = JsExGetProperty(exports, "main", true, &routine);
         if (JsNoError == errorCode)
         {
-            JsExCallWithStringArray(nullptr, routine, argv, nullptr);
+            errorCode = JsExCallWithStringArray(nullptr, routine, argv, nullptr);
+            if (JsNoError != errorCode)
+            {
+                extension->m_pod->PrintException();
+            }
         }
+
 
         finalResult = S_OK;
 
