@@ -1,6 +1,16 @@
+const _ = require('underscore');
 
-const assert = require("assert");
+let moduleExports = _.extend(
+    require('jswd/module'),
+    require('jswd/register'),
+    require('jswd/symbol'),
+    require('jswd/virtual'),
 
-const typing = require("typing");
+);
+
+moduleExports.physical = require('jswd/physical');
+
+module.exports = moduleExports;
+
 
 

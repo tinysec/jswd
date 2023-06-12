@@ -162,17 +162,59 @@ target_sources(
 # ===============================================================================================
 include(cmake/Binary2Header.cmake)
 
-bin2h(
-        SOURCE_FILE "src/script/dbgeng.js"
-        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/dbgeng.js.h"
-        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_DBGENG"
-)
+
 
 bin2h(
         SOURCE_FILE "src/script/jswd.js"
         HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/jswd.js.h"
         VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_JSWD"
 )
+
+bin2h(
+        SOURCE_FILE "src/script/dbgeng.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/dbgeng.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_DBGENG"
+)
+
+
+bin2h(
+        SOURCE_FILE "src/script/jswd/module.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/module.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_MODULE"
+)
+
+bin2h(
+        SOURCE_FILE "src/script/jswd/physical.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/physical.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_PHYSICAL"
+)
+
+bin2h(
+        SOURCE_FILE "src/script/jswd/reader.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/reader.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_READER"
+)
+
+bin2h(
+        SOURCE_FILE "src/script/jswd/register.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/register.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_REGISTER"
+)
+
+
+bin2h(
+        SOURCE_FILE "src/script/jswd/symbol.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/symbol.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_SYMBOL"
+)
+
+
+bin2h(
+        SOURCE_FILE "src/script/jswd/virtual.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/virtual.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_VIRTUAL"
+)
+
 
 # ===============================================================================================
 # test

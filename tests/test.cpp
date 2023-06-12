@@ -30,6 +30,8 @@ int main(int argc, char **argv)
 
     IDebugControl *debugControl = nullptr;
 
+    IDebugSymbols *debugSymbols = nullptr;
+
     StandardOutputCallbacks *standardOutputCallbacks = nullptr;
 
     StandardEventCallbacks *standardEventCallbacks = nullptr;
@@ -49,6 +51,13 @@ int main(int argc, char **argv)
             break;
         }
 
+        hr = debugClient->QueryInterface(__uuidof(IDebugSymbols), (PVOID *)&(debugSymbols));
+        if (!SUCCEEDED(hr))
+        {
+            break;
+        }
+
+
         standardOutputCallbacks = new StandardOutputCallbacks();
 
         hr = debugClient->SetOutputCallbacks(standardOutputCallbacks);
@@ -66,6 +75,13 @@ int main(int argc, char **argv)
             break;
         }
 
+        hr = debugSymbols->SetSymbolPath("D:\\sys\\symbols");
+        if (!SUCCEEDED(hr))
+        {
+            break;
+        }
+
+
         hr = DebugExtensionInitialize(&version, &flags);
         if (!SUCCEEDED(hr))
         {
@@ -77,6 +93,12 @@ int main(int argc, char **argv)
         {
             break;
         }
+        hr = debugControl->Execute( 0 , ".reload nt" , 0);
+        if (!SUCCEEDED(hr))
+        {
+            break;
+        }
+
 
         // Set to zero. There are currently no flags that can be used in this parameter.
         hr = debugControl->WaitForEvent(0, INFINITE);
@@ -88,6 +110,7 @@ int main(int argc, char **argv)
         hr = jsrun(debugClient, "jstests/test.js");
         if (!SUCCEEDED(hr))
         {
+
             break;
         }
 
