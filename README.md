@@ -2,8 +2,7 @@
 
 Windbg javascript extension for hacker , a gift from tinysec.
 
-Powered by [JSEX](https://github.com/tinysec/jsex) project.
-
+That is refactored of the [JSRT](https://github.com/tinysec/jsrt) , using modern C++ and ES6 syntax.
 
 ## usage
 

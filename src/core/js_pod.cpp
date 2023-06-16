@@ -13,6 +13,18 @@
 
 #include <gen/script/jswd.js.h>
 
+#include <gen/script/module.js.h>
+
+#include <gen/script/reader.js.h>
+
+#include <gen/script/register.js.h>
+
+#include <gen/script/symbol.js.h>
+
+#include <gen/script/virtual.js.h>
+
+#include <gen/script/physical.js.h>
+
 #include "js_pod.h"
 
 JSPod::JSPod()
@@ -99,6 +111,63 @@ HRESULT JSPod::Initialize()
         {
             break ;
         }
+
+
+
+        errorCode = this->m_builtin->RegisterSource(
+            "jswd/module" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_MODULE , SIZEOF_JSWD_BUILTIN_SCRIPT_MODULE )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+         errorCode = this->m_builtin->RegisterSource(
+            "jswd/physical" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_PHYSICAL , SIZEOF_JSWD_BUILTIN_SCRIPT_PHYSICAL )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+        errorCode = this->m_builtin->RegisterSource(
+            "jswd/reader" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_READER , SIZEOF_JSWD_BUILTIN_SCRIPT_READER )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+        errorCode = this->m_builtin->RegisterSource(
+            "jswd/register" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_REGISTER , SIZEOF_JSWD_BUILTIN_SCRIPT_REGISTER )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+         errorCode = this->m_builtin->RegisterSource(
+            "jswd/symbol" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_SYMBOL , SIZEOF_JSWD_BUILTIN_SCRIPT_SYMBOL )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+         errorCode = this->m_builtin->RegisterSource(
+            "jswd/virtual" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_VIRTUAL , SIZEOF_JSWD_BUILTIN_SCRIPT_VIRTUAL )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
 
         errorCode = this->m_builtin->RegisterSource(
             "jswd" ,
