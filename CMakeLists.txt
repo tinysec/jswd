@@ -190,6 +190,13 @@ bin2h(
 )
 
 bin2h(
+        SOURCE_FILE "src/script/jswd/processor.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/processor.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_PROCESSOR"
+)
+
+
+bin2h(
         SOURCE_FILE "src/script/jswd/reader.js"
         HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/reader.js.h"
         VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_READER"

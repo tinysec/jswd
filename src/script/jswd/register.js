@@ -173,8 +173,6 @@ function findRegister(nameOrIndex)
 
     item.type = desc.type;
 
-    //item.value = dbgeng.getRegisterValue(item.index);
-
     child = ( 0 !== ( desc.flags & dbgeng.DEBUG_REGISTER_SUB_REGISTER) );
 
     if ( child )
@@ -263,7 +261,7 @@ function findRegister(nameOrIndex)
     return item;
 }
 exports.findRegister = findRegister;
-
+exports.findReg = findRegister;
 
 function enumRegister()
 {
@@ -287,7 +285,7 @@ function enumRegister()
     return items;
 }
 exports.enumRegister = enumRegister;
-
+exports.enumReg = enumRegister;
 
 function readRegister(name)
 {
@@ -296,7 +294,7 @@ function readRegister(name)
     return item.value;
 }
 exports.readRegister = readRegister;
-
+exports.readReg = readRegister;
 
 function writeRegister( name , value )
 {
@@ -305,5 +303,5 @@ function writeRegister( name , value )
     return reg.value = value;
 }
 exports.writeRegister = writeRegister;
-
+exports.writeReg = writeRegister;
 

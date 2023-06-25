@@ -15,6 +15,11 @@
 
 #include <gen/script/module.js.h>
 
+
+#include <gen/script/physical.js.h>
+
+#include <gen/script/processor.js.h>
+
 #include <gen/script/reader.js.h>
 
 #include <gen/script/register.js.h>
@@ -23,7 +28,7 @@
 
 #include <gen/script/virtual.js.h>
 
-#include <gen/script/physical.js.h>
+
 
 #include "js_pod.h"
 
@@ -126,6 +131,15 @@ HRESULT JSPod::Initialize()
          errorCode = this->m_builtin->RegisterSource(
             "jswd/physical" ,
             std::string( (const char*)JSWD_BUILTIN_SCRIPT_PHYSICAL , SIZEOF_JSWD_BUILTIN_SCRIPT_PHYSICAL )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+        errorCode = this->m_builtin->RegisterSource(
+            "jswd/processor" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_PROCESSOR , SIZEOF_JSWD_BUILTIN_SCRIPT_PROCESSOR )
         );
         if ( JsNoError != errorCode )
         {
