@@ -224,7 +224,11 @@ HRESULT JSPod::InitializeJSRT()
 
     do
     {
+#ifdef _DEBUG
+        this->m_runtime = JsExCreateRuntime(true);
+#else
         this->m_runtime = JsExCreateRuntime(false);
+#endif //#ifdef _DEBUG
         if (nullptr == this->m_runtime)
         {
             break;
@@ -243,6 +247,14 @@ HRESULT JSPod::InitializeJSRT()
         {
             break;
         }
+
+        #ifdef _DEBUG
+        errorCode = JsExEnableDebug();
+        if (JsNoError != errorCode)
+        {
+            break;
+        }
+        #endif // #ifdef _DEBUG
 
         this->m_binding = NativeBinding::Create();
         if (nullptr == this->m_binding)

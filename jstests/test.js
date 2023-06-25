@@ -8,14 +8,9 @@ const fmt = require("fmt");
 
 function main(argv)
 {
-	let processors =   jswd.enumProcessor();
+	let reg = jswd.findRegister('es');
 
-	let i = 0;
-
-	for ( i = 0; i < processors.length; i++ )
-	{
-		fmt.printf(processors[i]);
-	}
+	fmt.printf(reg);
 
     return 0;
 }
