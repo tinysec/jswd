@@ -474,12 +474,23 @@ function execute(command , options)
 {
     assert( typing.isString(command) && ( 0 !== command.length) );
 
+    let argOptions = {
+        'echo' : false ,
+        'logged' : false,
+        'repeat' : false
+    };
+
     if ( arguments.length >= 2 )
     {
         assert( typing.isObject(options) );
+
+        if ( options )
+        {
+            argOptions = options;
+        }
     }
 
-    return binding.dbgeng.execute(command , options);
+    return binding.dbgeng.execute(command , argOptions);
 }
 exports.execute = execute;
 
@@ -2090,10 +2101,14 @@ function getCurrentThreadTeb()
 exports.getCurrentThreadTeb = getCurrentThreadTeb;
 
 
-
-function getThreadIdByProcessor()
+/**
+ *
+ * @param {Number} id   processor id
+ * @returns {Number}
+ */
+function getThreadIdByProcessor(id)
 {
-    return binding.dbgeng.getThreadIdByProcessor();
+    return binding.dbgeng.getThreadIdByProcessor(id);
 }
 exports.getThreadIdByProcessor = getThreadIdByProcessor;
 

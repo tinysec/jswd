@@ -1,23 +1,63 @@
-const fmt = require("fmt");
-
 const jswd = require("jswd");
 
-const _ = require('underscore');
+const dbgeng = require("dbgeng");
 
-let int = require('integer').Uint64;
+const fmt = require("fmt");
 
-/**
- *
- * @param {Array<String>} argv
- */
+class Processor
+{
+
+	constructor(id)
+	{
+		this.id = id;
+
+		this.registers = [];
+	}
+}
+
+
+function enumProcessor()
+{
+	let count = dbgeng.getNumberProcessors();
+
+	let i = 0;
+
+	let processor = null;
+
+	let oldTid = dbgeng.getCurrentThreadId();
+
+	let tid = 0;
+
+	let processors = [];
+
+	for ( i = 0; i < count; i++ )
+	{
+		processor = new Processor(i);
+
+		tid = dbgeng.getThreadIdByProcessor(i);
+
+		dbgeng.setCurrentThreadId(tid);
+
+		processor.registers = jswd.enumRegister();
+
+		processors.push( processor );
+	}
+
+	dbgeng.setCurrentThreadId(oldTid);
+
+	return processors;
+}
+
 function main(argv)
 {
-    fmt.printf("argv[0] is %s\n", argv[0]);
+	let processors =   enumProcessor();
 
-    fmt.printf( 'sizeof(nt!_UNICODE_STRING): %d\n' , jswd.sizeof('nt!_UNICODE_STRING') );
+	let i = 0;
 
-    fmt.printf( 'fieldOffset(nt!_UNICODE_STRING , Buffer): %d\n' , jswd.fieldOffset('nt!_UNICODE_STRING' , 'Buffer') );
-
+	for ( i = 0; i < processors.length; i++ )
+	{
+		fmt.printf(processors[i]);
+	}
 
     return 0;
 }
