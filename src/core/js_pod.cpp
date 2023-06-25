@@ -248,13 +248,7 @@ HRESULT JSPod::InitializeJSRT()
             break;
         }
 
-        #ifdef _DEBUG
-        errorCode = JsExEnableDebug();
-        if (JsNoError != errorCode)
-        {
-            break;
-        }
-        #endif // #ifdef _DEBUG
+    
 
         this->m_binding = NativeBinding::Create();
         if (nullptr == this->m_binding)
@@ -285,6 +279,14 @@ HRESULT JSPod::InitializeJSRT()
         {
             break;
         }
+
+        #ifdef _DEBUG
+            errorCode = JsExEnableDebug();
+            if (JsNoError != errorCode)
+            {
+                break;
+            }
+        #endif // #ifdef _DEBUG
 
         result = S_OK;
     } while (false);

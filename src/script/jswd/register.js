@@ -15,21 +15,32 @@ class Register
 {
     constructor(index) {
 
-        this.index = index;
+        //this.index = index;
+
+         Object.defineProperty(this, 'index', {
+          value: index,
+          writable: false,
+          enumerable: false,
+          configurable: true
+        });
 
         this.name = '';
 
         this.bits = 0;
 
         this.type = 0;
+
+        this.value = 0;
+
+        this.child = false;
     }
 
-    get value()
+    getValue()
     {
         return dbgeng.getRegisterValue(this.index);
     }
 
-    set value(newValue)
+    setValue(newValue)
     {
         let argValue = 0;
 
@@ -139,6 +150,8 @@ class Register
             }
         }
 
+        this.value = argValue;
+
         return dbgeng.setRegisterValue(this.index , this.type , argValue );
     }
 }
@@ -173,12 +186,16 @@ function findRegister(nameOrIndex)
 
     item.type = desc.type;
 
+    item.value = item.getValue();
+
     child = ( 0 !== ( desc.flags & dbgeng.DEBUG_REGISTER_SUB_REGISTER) );
 
     if ( child )
     {
         item.bits = desc.subregLength;
     }
+
+    item.child = child;
 
     if ( dbgeng.DEBUG_VALUE_INT8 === desc.type )
     {
@@ -291,7 +308,7 @@ function readRegister(name)
 {
     let item = findRegister(name);
 
-    return item.value;
+    return item.getValue();
 }
 exports.readRegister = readRegister;
 exports.readReg = readRegister;
@@ -300,7 +317,7 @@ function writeRegister( name , value )
 {
     let reg = findRegister(name);
 
-    return reg.value = value;
+    return reg.setValue(value);
 }
 exports.writeRegister = writeRegister;
 exports.writeReg = writeRegister;
