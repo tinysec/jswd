@@ -342,7 +342,7 @@ exports.readUint32LE = readUint32LE;
 
 function readUint64BE(reader ,address)
 {
-    let buffer = new ArrayBuffer(4);
+    let buffer = new ArrayBuffer(8);
 
     let view = new DataView(buffer);
 
@@ -368,7 +368,7 @@ exports.readUint64BE = readUint64BE;
 
 function readUint64LE(reader ,address)
 {
-    let buffer = new ArrayBuffer(4);
+    let buffer = new ArrayBuffer(8);
 
     let view = new DataView(buffer);
 
@@ -384,9 +384,13 @@ function readUint64LE(reader ,address)
 
     value = new Uint64(0);
 
-    value.high = view.getUint32(0 , true);
+    let high = view.getUint32(4 , true);
 
-    value.low = view.getUint32(4 , true);
+    let low = view.getUint32(0 , true);
+
+    value.high = high;
+
+    value.low = low;
 
     return value;
 }

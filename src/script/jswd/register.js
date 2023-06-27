@@ -312,6 +312,9 @@ function readRegister(name)
 }
 exports.readRegister = readRegister;
 exports.readReg = readRegister;
+exports.getRegister = readRegister;
+exports.getReg = readRegister;
+
 
 function writeRegister( name , value )
 {
@@ -321,4 +324,6 @@ function writeRegister( name , value )
 }
 exports.writeRegister = writeRegister;
 exports.writeReg = writeRegister;
+exports.setRegister = writeRegister;
+exports.setReg = writeRegister;
 

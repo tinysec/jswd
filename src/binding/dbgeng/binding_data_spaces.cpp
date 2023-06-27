@@ -671,7 +671,7 @@ _Ret_maybenull_ JsValueRef CALLBACK BindingDbgEng::ReadVirtual(
 
         if  ( !SUCCEEDED(hr) )
         {
-            JsExThrowError("ReadVirtual fail 0x%08X" , hr);
+            JsExThrowError("ReadVirtual 0x%X fail 0x%08X" , arg1Offset ,  hr);
             break ;
         }
 
