@@ -15,15 +15,22 @@
 
 #include <gen/script/module.js.h>
 
+
+#include <gen/script/physical.js.h>
+
+#include <gen/script/processor.js.h>
+
 #include <gen/script/reader.js.h>
 
 #include <gen/script/register.js.h>
+
+#include <gen/script/segment.js.h>
 
 #include <gen/script/symbol.js.h>
 
 #include <gen/script/virtual.js.h>
 
-#include <gen/script/physical.js.h>
+#include <gen/script/writer.js.h>
 
 #include "js_pod.h"
 
@@ -133,6 +140,15 @@ HRESULT JSPod::Initialize()
         }
 
         errorCode = this->m_builtin->RegisterSource(
+            "jswd/processor" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_PROCESSOR , SIZEOF_JSWD_BUILTIN_SCRIPT_PROCESSOR )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+        errorCode = this->m_builtin->RegisterSource(
             "jswd/reader" ,
             std::string( (const char*)JSWD_BUILTIN_SCRIPT_READER , SIZEOF_JSWD_BUILTIN_SCRIPT_READER )
         );
@@ -151,6 +167,15 @@ HRESULT JSPod::Initialize()
         }
 
          errorCode = this->m_builtin->RegisterSource(
+            "jswd/segment" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_SEGMENT , SIZEOF_JSWD_BUILTIN_SCRIPT_SEGMENT )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+         errorCode = this->m_builtin->RegisterSource(
             "jswd/symbol" ,
             std::string( (const char*)JSWD_BUILTIN_SCRIPT_SYMBOL , SIZEOF_JSWD_BUILTIN_SCRIPT_SYMBOL )
         );
@@ -158,6 +183,7 @@ HRESULT JSPod::Initialize()
         {
             break ;
         }
+
 
          errorCode = this->m_builtin->RegisterSource(
             "jswd/virtual" ,
@@ -168,6 +194,14 @@ HRESULT JSPod::Initialize()
             break ;
         }
 
+        errorCode = this->m_builtin->RegisterSource(
+            "jswd/writer" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_WRITER , SIZEOF_JSWD_BUILTIN_SCRIPT_WRITER )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
 
         errorCode = this->m_builtin->RegisterSource(
             "jswd" ,
@@ -210,7 +244,11 @@ HRESULT JSPod::InitializeJSRT()
 
     do
     {
+#ifdef _DEBUG
+        this->m_runtime = JsExCreateRuntime(true);
+#else
         this->m_runtime = JsExCreateRuntime(false);
+#endif //#ifdef _DEBUG
         if (nullptr == this->m_runtime)
         {
             break;
@@ -229,6 +267,8 @@ HRESULT JSPod::InitializeJSRT()
         {
             break;
         }
+
+    
 
         this->m_binding = NativeBinding::Create();
         if (nullptr == this->m_binding)
@@ -259,6 +299,14 @@ HRESULT JSPod::InitializeJSRT()
         {
             break;
         }
+
+        #ifdef _DEBUG
+            errorCode = JsExEnableDebug();
+            if (JsNoError != errorCode)
+            {
+                break;
+            }
+        #endif // #ifdef _DEBUG
 
         result = S_OK;
     } while (false);

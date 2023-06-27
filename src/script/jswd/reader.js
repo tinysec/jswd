@@ -4,13 +4,6 @@ const typing = require("typing");
 
 const fmt = require('fmt');
 
-const int = require('integer');
-
-const Int64 = int.Int64;
-
-const Uint64 = int.Uint64;
-
-
 const maxStringLength = 65536;
 
 
@@ -189,7 +182,7 @@ exports.readInt32LE = readInt32LE;
 
 function readInt64BE(reader ,address)
 {
-    let buffer = new ArrayBuffer(4);
+    let buffer = new ArrayBuffer(8);
 
     let view = new DataView(buffer);
 
@@ -205,9 +198,9 @@ function readInt64BE(reader ,address)
 
     value = new Int64(0);
 
-    value.low = view.getInt32(0 , false);
+    value.low = view.getInt32(4 , false);
 
-    value.high = view.getInt32(4 , false);
+    value.high = view.getInt32(0, false);
 
     return value;
 }
@@ -215,7 +208,7 @@ exports.readInt64BE = readInt64BE;
 
 function readInt64LE(reader ,address)
 {
-    let buffer = new ArrayBuffer(4);
+    let buffer = new ArrayBuffer(8);
 
     let view = new DataView(buffer);
 
@@ -231,9 +224,9 @@ function readInt64LE(reader ,address)
 
     value = new Int64(0);
 
-    value.high = view.getInt32(0 , true);
+    value.low = view.getInt32(0 , true);
 
-    value.low = view.getInt32(4 , true);
+    value.high = view.getInt32(4 , true);
 
     return value;
 }
@@ -342,7 +335,7 @@ exports.readUint32LE = readUint32LE;
 
 function readUint64BE(reader ,address)
 {
-    let buffer = new ArrayBuffer(4);
+    let buffer = new ArrayBuffer(8);
 
     let view = new DataView(buffer);
 
@@ -358,9 +351,9 @@ function readUint64BE(reader ,address)
 
     value = new Uint64(0);
 
-    value.low = view.getUint32(0 , false);
+    value.low = view.getUint32(4 , false);
 
-    value.high = view.getUint32(4 , false);
+    value.high = view.getUint32(0 , false);
 
     return value;
 }
@@ -368,7 +361,7 @@ exports.readUint64BE = readUint64BE;
 
 function readUint64LE(reader ,address)
 {
-    let buffer = new ArrayBuffer(4);
+    let buffer = new ArrayBuffer(8);
 
     let view = new DataView(buffer);
 
@@ -384,9 +377,9 @@ function readUint64LE(reader ,address)
 
     value = new Uint64(0);
 
-    value.high = view.getUint32(0 , true);
+    value.low = view.getUint32(0 , true);
 
-    value.low = view.getUint32(4 , true);
+    value.high = view.getUint32(4 , true);
 
     return value;
 }

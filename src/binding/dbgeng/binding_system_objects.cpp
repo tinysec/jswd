@@ -350,6 +350,12 @@ _Ret_maybenull_ JsValueRef CALLBACK BindingDbgEng::GetThreadIdByProcessor(
 
     do
     {
+        if ( argumentCount < 2 )
+        {
+            JsExThrowError("invalid argument cound %d" , argumentCount);
+            break;
+        }
+
          errorCode = JsExAssumeUint32( arguments[1] , &arg1Processor );
         if ( JsNoError != errorCode )
         {
@@ -399,6 +405,12 @@ _Ret_maybenull_ JsValueRef CALLBACK BindingDbgEng::SetCurrentThreadId(
 
     do
     {
+        if ( argumentCount < 2 )
+        {
+            JsExThrowError("invalid argument cound %d" , argumentCount);
+            break;
+        }
+
          errorCode = JsExAssumeUint64( arguments[1] , &arg1Id );
         if ( JsNoError != errorCode )
         {

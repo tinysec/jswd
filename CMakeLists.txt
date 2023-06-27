@@ -65,7 +65,7 @@ else ()
 
     FetchContent_Declare(jsex
             GIT_REPOSITORY ${GIT_REPO}
-            GIT_TAG autotag-20230616-092319
+            GIT_TAG autotag-20230627-075036
             )
 
     FetchContent_MakeAvailable(jsex)
@@ -190,6 +190,13 @@ bin2h(
 )
 
 bin2h(
+        SOURCE_FILE "src/script/jswd/processor.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/processor.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_PROCESSOR"
+)
+
+
+bin2h(
         SOURCE_FILE "src/script/jswd/reader.js"
         HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/reader.js.h"
         VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_READER"
@@ -199,6 +206,12 @@ bin2h(
         SOURCE_FILE "src/script/jswd/register.js"
         HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/register.js.h"
         VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_REGISTER"
+)
+
+bin2h(
+        SOURCE_FILE "src/script/jswd/segment.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/segment.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_SEGMENT"
 )
 
 
@@ -213,6 +226,12 @@ bin2h(
         SOURCE_FILE "src/script/jswd/virtual.js"
         HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/virtual.js.h"
         VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_VIRTUAL"
+)
+
+bin2h(
+        SOURCE_FILE "src/script/jswd/writer.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/writer.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_WRITER"
 )
 
 

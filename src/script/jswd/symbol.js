@@ -20,6 +20,11 @@ exports.resolve = dbgeng.getOffsetByName;
 exports.symbolize = dbgeng.getNameByOffset;
 
 
+/**
+ *
+ * @param {String} name
+ * @returns {Number}
+ */
 function sizeof(name)
 {
     let info = dbgeng.getSymbolTypeId( name);
@@ -29,6 +34,12 @@ function sizeof(name)
 exports.sizeof = sizeof;
 
 
+/**
+ *
+ * @param {String} type
+ * @param {String} field
+ * @returns {Number}
+ */
 function fieldOffset( type , field)
 {
     let info = dbgeng.getSymbolTypeId( type);
