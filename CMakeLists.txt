@@ -228,6 +228,12 @@ bin2h(
         VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_VIRTUAL"
 )
 
+bin2h(
+        SOURCE_FILE "src/script/jswd/writer.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/writer.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_WRITER"
+)
+
 
 # ===============================================================================================
 # test

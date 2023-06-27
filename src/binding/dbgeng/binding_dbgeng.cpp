@@ -512,6 +512,12 @@ JsErrorCode BindingDbgEng::bindDebugDataSpaces()
             break;
         }
 
+        errorCode = this->bindRoutine("writePhysical", BindingDbgEng::WritePhysical);
+        if (JsNoError != errorCode)
+        {
+            break;
+        }
+
         errorCode = this->bindRoutine("writeVirtual", BindingDbgEng::WriteVirtual);
         if (JsNoError != errorCode)
         {

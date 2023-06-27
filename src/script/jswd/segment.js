@@ -65,7 +65,7 @@ class Segment
 exports.Segment = Segment;
 
 /**
- *
+ * get segment value
  * @param {String|Number} nameOrSelector
  * @returns {Uint64}
  */
@@ -76,6 +76,8 @@ function getSegment(nameOrSelector)
     if ( typing.isString(nameOrSelector) )
     {
         selector = reg.getRegister(nameOrSelector);
+
+        assert( typing.isNumber(selector) );
     }
     else
     {
@@ -85,6 +87,8 @@ function getSegment(nameOrSelector)
     }
 
     let gdtr = reg.getRegister('gdtr');
+
+    assert( Uint64.isUint64(gdtr) );
 
     let index = selector >> 3;
 

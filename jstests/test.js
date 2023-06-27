@@ -9,15 +9,12 @@ const fmt = require("fmt");
 
 const typing = require("typing");
 
+
 function main(argv)
 {
-    let gdtr = jswd.readReg('gdtr');
+    //fmt.printf( getSegment('fs') );
 
-    let gdtl = jswd.readReg('gdtl');
-
-    fmt.printf('gdtr = 0x%X\n' , gdtr);
-
-    fmt.printf('gdtl = 0x%X\n' , gdtl);
+    fmt.printf( '0x%X' , jswd.getSegment('es') );
 
     return 0;
 }

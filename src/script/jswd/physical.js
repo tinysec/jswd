@@ -6,15 +6,13 @@ const dbgeng = require("dbgeng");
 
 const readerExports = require('jswd/reader');
 
-let name = '';
-
-let routine = null;
+const writerExports = require('jswd/writer');
 
 
 class Reader
 {
-    constructor() {
-
+    constructor()
+    {
 
     }
 
@@ -24,7 +22,27 @@ class Reader
     }
 }
 
-let physicalReader = new Reader();
+class Writer
+{
+    constructor()
+    {
+
+    }
+
+    write(address , buffer)
+    {
+        return dbgeng.writePhysical(address , buffer);
+    }
+}
+
+
+let name = '';
+
+let routine = null;
+
+let reader = new Reader();
+
+let writer = new Writer();
 
 for ( name  in  readerExports)
 {
@@ -32,7 +50,20 @@ for ( name  in  readerExports)
 
     if ( typing.isFunction(routine) )
     {
-        exports[name] = routine.bind(this , physicalReader);
+        exports[name] = routine.bind(this , reader);
     }
 }
+
+
+// for writer
+for ( name  in  writerExports )
+{
+    routine = writerExports[name];
+
+    if ( typing.isFunction(routine) )
+    {
+        exports[name] = routine.bind(this , writer);
+    }
+}
+
 

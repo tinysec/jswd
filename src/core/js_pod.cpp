@@ -30,7 +30,7 @@
 
 #include <gen/script/virtual.js.h>
 
-
+#include <gen/script/writer.js.h>
 
 #include "js_pod.h"
 
@@ -194,6 +194,14 @@ HRESULT JSPod::Initialize()
             break ;
         }
 
+        errorCode = this->m_builtin->RegisterSource(
+            "jswd/writer" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_WRITER , SIZEOF_JSWD_BUILTIN_SCRIPT_WRITER )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
 
         errorCode = this->m_builtin->RegisterSource(
             "jswd" ,
