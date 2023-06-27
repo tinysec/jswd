@@ -26,6 +26,8 @@ int main(int argc, char **argv)
 
     ULONG flags = 0;
 
+    JsErrorCode errorCode = JsErrorFatal;
+
     IDebugClient *debugClient = nullptr;
 
     IDebugControl *debugControl = nullptr;
@@ -38,6 +40,10 @@ int main(int argc, char **argv)
 
     do
     {
+        if (!SUCCEEDED(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED)) )
+        {
+            break;
+        }
 
         hr = DebugCreate(__uuidof(IDebugClient), (PVOID *)&(debugClient));
         if (!SUCCEEDED(hr))
@@ -107,13 +113,12 @@ int main(int argc, char **argv)
             break;
         }
 
-        hr = jsrun(debugClient, "jstests/test.js");
+        hr = jsrun(debugClient, "D:\\code\\jswd\\jstests\\test.js");
         if (!SUCCEEDED(hr))
         {
 
             break;
         }
-
 
     } while (false);
 
@@ -147,6 +152,8 @@ int main(int argc, char **argv)
         standardEventCallbacks->Release();
         standardEventCallbacks = nullptr;
     }
+
+    CoUninitialize();
 
     return 0;
 }

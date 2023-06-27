@@ -115,6 +115,12 @@ _Ret_maybenull_ JsValueRef CALLBACK BindingDbgEng::SetImplicitProcessDataOffset(
 
     do
     {
+        if ( argumentCount < 2 )
+        {
+            JsExThrowError("invalid argument cound %d" , argumentCount);
+            break;
+        }
+
         errorCode = JsExAssumeUint64( arguments[1] , &arg1Offset );
         if ( JsNoError != errorCode )
         {
@@ -164,6 +170,12 @@ _Ret_maybenull_ JsValueRef CALLBACK BindingDbgEng::SetImplicitThreadDataOffset(
 
     do
     {
+        if ( argumentCount < 2 )
+        {
+            JsExThrowError("invalid argument cound %d" , argumentCount);
+            break;
+        }
+
         errorCode = JsExAssumeUint64( arguments[1] , &arg1Offset );
         if ( JsNoError != errorCode )
         {

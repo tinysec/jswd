@@ -6,30 +6,36 @@ const dbgeng = require("dbgeng");
 
 const fmt = require('fmt');
 
-const int = require('integer');
-
-const Uint64 = int.Uint64;
-
-
 class Register
 {
     constructor(index) {
 
-        this.index = index;
+        //this.index = index;
+
+         Object.defineProperty(this, 'index', {
+          value: index,
+          writable: false,
+          enumerable: false,
+          configurable: true
+        });
 
         this.name = '';
 
         this.bits = 0;
 
         this.type = 0;
+
+        this.value = 0;
+
+        this.child = false;
     }
 
-    get value()
+    getValue()
     {
         return dbgeng.getRegisterValue(this.index);
     }
 
-    set value(newValue)
+    setValue(newValue)
     {
         let argValue = 0;
 
@@ -139,6 +145,8 @@ class Register
             }
         }
 
+        this.value = argValue;
+
         return dbgeng.setRegisterValue(this.index , this.type , argValue );
     }
 }
@@ -173,7 +181,7 @@ function findRegister(nameOrIndex)
 
     item.type = desc.type;
 
-    //item.value = dbgeng.getRegisterValue(item.index);
+    item.value = item.getValue();
 
     child = ( 0 !== ( desc.flags & dbgeng.DEBUG_REGISTER_SUB_REGISTER) );
 
@@ -181,6 +189,8 @@ function findRegister(nameOrIndex)
     {
         item.bits = desc.subregLength;
     }
+
+    item.child = child;
 
     if ( dbgeng.DEBUG_VALUE_INT8 === desc.type )
     {
@@ -263,7 +273,7 @@ function findRegister(nameOrIndex)
     return item;
 }
 exports.findRegister = findRegister;
-
+exports.findReg = findRegister;
 
 function enumRegister()
 {
@@ -287,23 +297,27 @@ function enumRegister()
     return items;
 }
 exports.enumRegister = enumRegister;
+exports.enumReg = enumRegister;
 
-
-function readRegister(name)
+function getRegister(name)
 {
     let item = findRegister(name);
 
-    return item.value;
+    return item.getValue();
 }
-exports.readRegister = readRegister;
+exports.getRegister = getRegister;
+exports.getReg = getRegister;
 
 
-function writeRegister( name , value )
+function setRegister( name , value )
 {
     let reg = findRegister(name);
 
-    return reg.value = value;
+    return reg.setValue(value);
 }
-exports.writeRegister = writeRegister;
+exports.setRegister = setRegister;
+exports.setReg = setRegister;
+
+
 
 

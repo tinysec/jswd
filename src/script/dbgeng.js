@@ -7,10 +7,6 @@ const binding = require("binding");
 
 const fmt = require('fmt');
 
-const int = require("integer");
-
-const Int64 = int.Int64;
-const Uint64 = int.Uint64;
 
 // Classes of debuggee.  Each class
 // has different qualifiers for specific
@@ -292,9 +288,7 @@ function getRunningProcessDescription(server , systemId , flags)
     }
     else
     {
-        assert( Uint64.isUint64(server) );
-
-        argServer = server.toString(16);
+        argServer = '0x' + server.toString(16);
     }
 
     assert( typing.isNumber(systemId) );
@@ -326,9 +320,7 @@ function getRunningProcessSystemIdByExecutableName(server , exeName , flags )
     }
     else
     {
-        assert( Uint64.isUint64(server) );
-
-        argServer = server.toString(16);
+        argServer = '0x' + server.toString(16);
     }
 
     assert( typing.isString(exeName) );
@@ -392,9 +384,7 @@ function assemble(offset , instruction  )
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     assert( typing.isString(instruction) );
@@ -441,9 +431,7 @@ function disassemble(offset , flags)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     if ( arguments.length >= 2 )
@@ -474,12 +462,23 @@ function execute(command , options)
 {
     assert( typing.isString(command) && ( 0 !== command.length) );
 
+    let argOptions = {
+        'echo' : false ,
+        'logged' : false,
+        'repeat' : false
+    };
+
     if ( arguments.length >= 2 )
     {
         assert( typing.isObject(options) );
+
+        if ( options )
+        {
+            argOptions = options;
+        }
     }
 
-    return binding.dbgeng.execute(command , options);
+    return binding.dbgeng.execute(command , argOptions);
 }
 exports.execute = execute;
 
@@ -565,9 +564,7 @@ function getNearInstruction(offset , delta)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
 
@@ -681,9 +678,7 @@ function getStackTrace( frameOffset , stackOffset , instructionOffset , depth)
     }
     else
     {
-        assert( Uint64.isUint64(frameOffset) );
-
-        argFrameOffset = frameOffset.toString(16);
+        argFrameOffset = '0x' + frameOffset.toString(16);
     }
 
     // stackOffset
@@ -697,9 +692,7 @@ function getStackTrace( frameOffset , stackOffset , instructionOffset , depth)
     }
     else
     {
-        assert( Uint64.isUint64(stackOffset) );
-
-        argStackOffset = stackOffset.toString(16);
+        argStackOffset = '0x' + stackOffset.toString(16);
     }
 
     // instructionOffset
@@ -713,9 +706,7 @@ function getStackTrace( frameOffset , stackOffset , instructionOffset , depth)
     }
     else
     {
-        assert( Uint64.isUint64(instructionOffset) );
-
-        argInstructionOffset = instructionOffset.toString(16);
+        argInstructionOffset = '0x' + instructionOffset.toString(16);
     }
 
 
@@ -884,7 +875,7 @@ function readControl(processor , offset , buffer)
     {
         assert( Uint64.isUint64(offset) );
 
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     assert( typing.isNumber(processor) );
@@ -942,9 +933,7 @@ function readIo(interfaceType , busNumber , addressSpace , offset , buffer)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     assert( typing.isNumber(interfaceType) );
@@ -1002,9 +991,7 @@ function readPhysical(offset , buffer)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     assert( typing.isArrayBuffer(buffer) );
@@ -1054,9 +1041,7 @@ function readVirtual(offset , buffer)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     return binding.dbgeng.readVirtual( argOffset , buffer);
@@ -1088,9 +1073,7 @@ function searchVirtual(offset , length , pattern , granularity)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     // length
@@ -1104,12 +1087,9 @@ function searchVirtual(offset , length , pattern , granularity)
     }
     else
     {
-        assert( Uint64.isUint64(length) );
-
-        argLength = length.toString(16);
+        argLength = '0x' + length.toString(16);
     }
 
-    assert( Uint64.isUint64(length) );
 
     assert( typing.isArrayBuffer(pattern) );
 
@@ -1170,9 +1150,7 @@ function writeControl(processor , offset , buffer)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     return binding.dbgeng.writeControl(
@@ -1207,9 +1185,7 @@ function writeIo(interfaceType , busNumber , addressSpace , offset , buffer)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     return binding.dbgeng.writeIo(
@@ -1244,14 +1220,41 @@ function writeMsr(address , value)
     }
     else
     {
-        assert( Uint64.isUint64(value) );
-
-        argValue = value.toString(16);
+        argValue = '0x' + value.toString(16);
     }
 
     return binding.dbgeng.writeMsr( address , argValue);
 }
 exports.writeMsr = writeMsr;
+
+
+/**
+ *
+ * @param {Number , String , Uint64} offset
+ * @param {ArrayBuffer} buffer
+ * @returns {Number}
+ */
+function writePhysical(offset , buffer)
+{
+    let argOffset = 0;
+
+    // offset
+    if ( typing.isNumber(offset) )
+    {
+        argOffset = offset;
+    }
+    else if ( typing.isString(offset) )
+    {
+        argOffset = offset;
+    }
+    else
+    {
+        argOffset = '0x' + offset.toString(16);
+    }
+
+    return binding.dbgeng.writePhysical( argOffset , buffer);
+}
+exports.writePhysical = writePhysical;
 
 /**
  *
@@ -1274,9 +1277,7 @@ function writeVirtual(offset , buffer)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     return binding.dbgeng.writeVirtual( argOffset , buffer);
@@ -1489,8 +1490,6 @@ function setRegisterValue(index , type ,  value)
         }
         else
         {
-            assert( Uint64.isUint64(value)  );
-
             argValue = '0x' + value.toString(16);
         }
     }
@@ -1562,9 +1561,7 @@ function getFieldOffset(imageBase , typeId , field ,)
     }
     else
     {
-        assert( Uint64.isUint64(imageBase) );
-
-        argModuleBase = imageBase.toString(16);
+        argModuleBase = '0x' + imageBase.toString(16);
     }
 
     return binding.dbgeng.getFieldOffset( argModuleBase , typeId , field);
@@ -1633,9 +1630,7 @@ function getModuleByOffset(offset , startIndex)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     if ( arguments.length >= 2)
@@ -1673,9 +1668,7 @@ function getModuleNames(index , base)
     }
     else
     {
-        assert( Uint64.isUint64(base) );
-
-        argBase = base.toString(16);
+        argBase = '0x' + base.toString(16);
     }
 
     return binding.dbgeng.getModuleNames(index , argBase);
@@ -1718,9 +1711,7 @@ function getNameByOffset(offset)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     let info = binding.dbgeng.getNameByOffset(argOffset);
@@ -1758,9 +1749,7 @@ function getNearNameByOffset(offset , delta)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     if ( arguments.length >= 2 )
@@ -1823,9 +1812,7 @@ function getOffsetTypeId(offset)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     let info = binding.dbgeng.getOffsetTypeId(argOffset);
@@ -1900,9 +1887,7 @@ function getTypeId(imageBase , name)
     }
     else
     {
-        assert( Uint64.isUint64(imageBase) );
-
-        argModuleBase = imageBase.toString(16);
+        argModuleBase = '0x' + imageBase.toString(16);
     }
 
     assert( typing.isString(name) );
@@ -1932,9 +1917,7 @@ function getTypeName(imageBase , typeId )
     }
     else
     {
-        assert( Uint64.isUint64(imageBase) );
-
-        argModuleBase = imageBase.toString(16);
+        argModuleBase = '0x' + imageBase.toString(16);
     }
 
 
@@ -1964,9 +1947,7 @@ function getTypeSize(imageBase , typeId)
     }
     else
     {
-        assert( Uint64.isUint64(imageBase) );
-
-        argModuleBase = imageBase.toString(16);
+        argModuleBase = '0x' + imageBase.toString(16);
     }
 
     assert( typing.isNumber(typeId) );
@@ -2090,10 +2071,14 @@ function getCurrentThreadTeb()
 exports.getCurrentThreadTeb = getCurrentThreadTeb;
 
 
-
-function getThreadIdByProcessor()
+/**
+ *
+ * @param {Number} id   processor id
+ * @returns {Number}
+ */
+function getThreadIdByProcessor(id)
 {
-    return binding.dbgeng.getThreadIdByProcessor();
+    return binding.dbgeng.getThreadIdByProcessor(id);
 }
 exports.getThreadIdByProcessor = getThreadIdByProcessor;
 
@@ -2139,9 +2124,7 @@ function setImplicitProcessDataOffset(offset)
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
 
@@ -2164,9 +2147,7 @@ function setImplicitThreadDataOffset()
     }
     else
     {
-        assert( Uint64.isUint64(offset) );
-
-        argOffset = offset.toString(16);
+        argOffset = '0x' + offset.toString(16);
     }
 
     return  binding.dbgeng.setImplicitThreadDataOffset(argOffset);

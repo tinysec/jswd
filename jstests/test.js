@@ -1,22 +1,18 @@
-const fmt = require("fmt");
+
+const assert = require("assert");
 
 const jswd = require("jswd");
 
-const _ = require('underscore');
+const dbgeng = require("dbgeng");
 
-let int = require('integer').Uint64;
+const fmt = require("fmt");
 
-/**
- *
- * @param {Array<String>} argv
- */
+const typing = require("typing");
+
+
 function main(argv)
 {
-    fmt.printf("argv[0] is %s\n", argv[0]);
-
-    fmt.printf( 'sizeof(nt!_UNICODE_STRING): %d\n' , jswd.sizeof('nt!_UNICODE_STRING') );
-
-    fmt.printf( 'fieldOffset(nt!_UNICODE_STRING , Buffer): %d\n' , jswd.fieldOffset('nt!_UNICODE_STRING' , 'Buffer') );
+    fmt.printf( jswd.fieldOffset('_UNICODE_STRING' , 'Buffer') );
 
 
     return 0;
