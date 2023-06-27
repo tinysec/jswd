@@ -65,7 +65,7 @@ else ()
 
     FetchContent_Declare(jsex
             GIT_REPOSITORY ${GIT_REPO}
-            GIT_TAG autotag-20230625-040717
+            GIT_TAG autotag-20230627-075036
             )
 
     FetchContent_MakeAvailable(jsex)
