@@ -34,7 +34,5 @@ for ( name  in  readerExports )
     {
         exports[name] = routine.bind(this , virtualReader);
     }
-
-
 }
 

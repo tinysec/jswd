@@ -208,6 +208,12 @@ bin2h(
         VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_REGISTER"
 )
 
+bin2h(
+        SOURCE_FILE "src/script/jswd/segment.js"
+        HEADER_FILE "${PROJECT_BINARY_DIR}/gen/script/segment.js.h"
+        VARIABLE_NAME "JSWD_BUILTIN_SCRIPT_SEGMENT"
+)
+
 
 bin2h(
         SOURCE_FILE "src/script/jswd/symbol.js"

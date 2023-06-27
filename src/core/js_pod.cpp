@@ -24,6 +24,8 @@
 
 #include <gen/script/register.js.h>
 
+#include <gen/script/segment.js.h>
+
 #include <gen/script/symbol.js.h>
 
 #include <gen/script/virtual.js.h>
@@ -165,6 +167,15 @@ HRESULT JSPod::Initialize()
         }
 
          errorCode = this->m_builtin->RegisterSource(
+            "jswd/segment" ,
+            std::string( (const char*)JSWD_BUILTIN_SCRIPT_SEGMENT , SIZEOF_JSWD_BUILTIN_SCRIPT_SEGMENT )
+        );
+        if ( JsNoError != errorCode )
+        {
+            break ;
+        }
+
+         errorCode = this->m_builtin->RegisterSource(
             "jswd/symbol" ,
             std::string( (const char*)JSWD_BUILTIN_SCRIPT_SYMBOL , SIZEOF_JSWD_BUILTIN_SCRIPT_SYMBOL )
         );
@@ -172,6 +183,7 @@ HRESULT JSPod::Initialize()
         {
             break ;
         }
+
 
          errorCode = this->m_builtin->RegisterSource(
             "jswd/virtual" ,
