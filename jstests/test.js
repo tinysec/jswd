@@ -12,9 +12,8 @@ const typing = require("typing");
 
 function main(argv)
 {
-    //fmt.printf( getSegment('fs') );
+    fmt.printf( jswd.fieldOffset('_UNICODE_STRING' , 'Buffer') );
 
-    fmt.printf( '0x%X' , jswd.getSegment('es') );
 
     return 0;
 }
